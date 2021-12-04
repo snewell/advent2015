@@ -12,6 +12,6 @@ logic_gates = parse()
 a = logic_gates.get("a")
 
 # reset
-logic_gates = parse()
-logic_gates.add_gate("b", a)
+logic_gates.clear_cache()
+logic_gates.add_cache_entry("b", a)
 print(logic_gates.get("a"))

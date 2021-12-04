@@ -70,17 +70,23 @@ def _make_rshift_circuit(lhs, amount):
 class Gates:
     def __init__(self):
         self._gates = {}
+        self._cache = {}
 
     def add_gate(self, name, logic_fn):
         self._gates[name] = logic_fn
 
     def get(self, name):
-        result = self._gates[name]
-        if isinstance(result, int):
-            return result
-        real_result = result(self)
-        self._gates[name] = real_result
-        return real_result
+        if name in self._cache:
+            return self._cache[name]
+        result = self._gates[name](self)
+        self._cache[name] = result
+        return result
+
+    def clear_cache(self):
+        self._cache = {}
+
+    def add_cache_entry(self, name, value):
+        self._cache[name] = value
 
 
 _RULE_RE = re.compile(R"^(.+) -> ([a-z]+)$")
