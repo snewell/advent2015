@@ -15,5 +15,3 @@ a = logic_gates.get("a")
 logic_gates = parse()
 logic_gates.add_gate("b", a)
 print(logic_gates.get("a"))
-# for name, gate in logic_gates._gates.items():
-# print("{} -> {}".format(name, gate(logic_gates._gates)))
